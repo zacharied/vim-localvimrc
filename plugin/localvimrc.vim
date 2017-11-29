@@ -91,6 +91,14 @@ else
   let s:localvimrc_ask = g:localvimrc_ask
 endif
 
+" define default "localvimrc_notify_loaded" {{{2
+" copy to script local variable to prevent .lvimrc modifying the notify option.
+if (!exists("g:localvimrc_notify_loaded"))
+  let s:localvimrc_notify_loaded = 0
+else
+  let s:localvimrc_notify_loaded = g:localvimrc_notify_loaded
+endif
+
 " define default "localvimrc_whitelist" {{{2
 " copy to script local variable to prevent .lvimrc modifying the whitelist.
 if (!exists("g:localvimrc_whitelist"))
@@ -444,6 +452,7 @@ function! s:LocalVimRC()
           try
             " execute the command
             exec "sandbox " . l:command
+            call s:LocalVimRCNotifyLoaded(l:rcfile)
             call s:LocalVimRCDebug(1, "sourced " . l:rcfile)
           catch ^Vim\%((\a\+)\)\=:E48
             call s:LocalVimRCDebug(1, "unable to use sandbox on '" . l:rcfile . "'")
@@ -498,6 +507,7 @@ function! s:LocalVimRC()
               if (l:sandbox_answer =~? '^[ya]$')
                 " execute the command
                 exec l:command
+                call s:LocalVimRCNotifyLoaded(l:rcfile)
                 call s:LocalVimRCDebug(1, "sourced " . l:rcfile)
               elseif (l:sandbox_answer =~? "^q$")
                 call s:LocalVimRCDebug(1, "ended processing files")
@@ -508,6 +518,7 @@ function! s:LocalVimRC()
         else
           " execute the command
           exec l:command
+          call s:LocalVimRCNotifyLoaded(l:rcfile)
           call s:LocalVimRCDebug(1, "sourced " . l:rcfile)
         endif
 
@@ -772,6 +783,16 @@ endfunction
 function! s:LocalVimRCDebug(level, text)
   if (g:localvimrc_debug >= a:level)
     echom "localvimrc: " . a:text
+  endif
+endfunction
+
+" Function: s:LocalVimRCNotifyLoaded(filename) {{{2
+"
+" output a message when a localvimrc is loaded
+"
+function! s:LocalVimRCNotifyLoaded(filename)
+  if (s:localvimrc_notify_loaded == 1)
+    echom "localvimrc: loaded " . a:filename
   endif
 endfunction
 

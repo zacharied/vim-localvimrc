@@ -26,12 +26,13 @@ Contents ~
   5. The |g:localvimrc_file_directory_only| setting
   6. The |g:localvimrc_sandbox| setting
   7. The |g:localvimrc_ask| setting
-  8. The |g:localvimrc_persistent| setting
-  9. The |g:localvimrc_persistence_file| setting
-  10. The |g:localvimrc_whitelist| setting
-  11. The |g:localvimrc_blacklist| setting
-  12. The |g:localvimrc_autocmd| setting
-  13. The |g:localvimrc_debug| setting
+  8. The |g:localvimrc_notify_loaded| setting
+  9. The |g:localvimrc_persistent| setting
+  10. The |g:localvimrc_persistence_file| setting
+  11. The |g:localvimrc_whitelist| setting
+  12. The |g:localvimrc_blacklist| setting
+  13. The |g:localvimrc_autocmd| setting
+  14. The |g:localvimrc_debug| setting
  6. Autocommands                                      |localvimrc-autocommands|
   1. The |LocalVimRCPre| autocommand
   2. The |LocalVimRCPost| autocommand
@@ -268,6 +269,15 @@ asked once as long as the local vimrc file has not been changed.
 - Value '0': Don't ask before loading a vimrc file.
 - Value '1': Ask before loading a vimrc file.
 - Default: '1'
+
+-------------------------------------------------------------------------------
+The *g:localvimrc_notify_loaded* setting
+
+Print a message upon sourcing a local vimrc file.
+
+- Value '0': Don't print anything upon loading a local vimrc file.
+- Value '1': Print a message upon loading a local vimrc file.
+- Default: '0'
 
 -------------------------------------------------------------------------------
 The *g:localvimrc_persistent* setting
