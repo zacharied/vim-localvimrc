@@ -212,6 +212,14 @@ only asked once as long as the local vimrc file has not been changed.
   - Value `1`: Ask before loading a vimrc file.
   - Default: `1`
 
+### The `g:localvimrc_notify_loaded` setting
+
+Print a message upon sourcing a local vimrc file.
+
+- Value `0`: Don't print anything upon loading a local vimrc file.
+- Value `1`: Print a message upon loading a local vimrc file.
+- Default: `0`
+
 ### The `g:localvimrc_persistent` setting
 
 Make the decisions given when asked before sourcing local vimrc files
